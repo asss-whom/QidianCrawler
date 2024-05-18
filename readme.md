@@ -3,20 +3,21 @@
 ## 简介
 
 本程序是一个基于DrissionPage库的小说爬虫，用于爬取起点中文网的小说内容，它使用Rich库来提供丰富的输出信息。
-目前测试的Python版本为3.10.11。
+目前测试的Python版本为3.11.9。
 
 ## 功能
 
 - 爬取起点中文网的小说章节内容
+- 支持断点续传。如果程序退出，可自动跳过已下载内容。
 
 ## 使用说明
 
 1. 安装依赖库：`pip install -r requirements.txt`
 2. 运行程序：`python main.py`
-3. 如果出现`FileNotFoundError`，请对照[🌏 准备工作 | DrissionPage](https://www.drissionpage.cn/get_start/before_start)解决。
+3. 如果出现`FileNotFoundError`，请对照[🌏 准备工作 | DrissionPage官网](https://www.drissionpage.cn/get_start/before_start)解决。
 4. 根据提示输入小说链接，程序将爬取指定的小说内容并保存到程序所在的文件夹中。
 5. 如果需要下载VIP章节，请您在弹出的浏览器中登陆后重新执行操作2。**请您不要关闭弹出的浏览器。**
-6. 如果觉得下载速度太慢，可以手动调整`main.py:37`的`sleep`语句。**请注意下载速度过快易被起点拦截！**
+6. 如果觉得下载速度太慢，可以手动调整`main.py:96`的`sleep`语句。**请注意下载速度过快易被起点拦截！**
 
 ## 注意事项
 
