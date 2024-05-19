@@ -76,6 +76,7 @@ def create_parser():
 def download_range_content(url: str, lower_bound: int, upper_bound: int) -> None:
     if lower_bound > upper_bound:
         lower_bound, upper_bound = upper_bound, lower_bound
+    lower_bound -= 1  # 更加符合习惯用法
 
     crawler = Crawler()
     index = crawler.get_index(url)
