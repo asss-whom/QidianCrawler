@@ -97,3 +97,10 @@ def range_donwload(url: str, lower_bound: int, upper_bound: int) -> None:
             content = "\n".join(chpts)
             save(f"{index.name}-{lower_bound}-{upper_bound}", content)
             log.info("✨ 小说保存完毕")
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception as e:
+        log.error(e)
