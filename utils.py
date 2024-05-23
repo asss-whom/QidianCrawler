@@ -29,7 +29,7 @@ class Crawler:
 
     def get_index(self, url: str) -> Index:
         self.page.get(url)
-        name = self.page.ele("#bookName").text
+        bookname = self.page.ele("#bookName").text
         elems = self.page.s_eles(".chapter-name")
         urls: list[ChapterInfo] = []
         for elem in elems:
@@ -37,7 +37,7 @@ class Crawler:
             href = elem.attr("href")
             if href is not None:
                 urls.append(ChapterInfo(name, href))
-        return Index(name, urls)
+        return Index(bookname, urls)
 
     def get_chpt(self, chpt: str) -> str:
         self.page.get(chpt)

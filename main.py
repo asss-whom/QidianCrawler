@@ -1,4 +1,6 @@
 import argparse
+import random
+import time
 from pathlib import Path
 
 from rich.progress import Progress
@@ -52,16 +54,17 @@ def full_download(url: str) -> None:
     log.info("🎉 DrissionPage初始化完毕")
 
     index = crawler.get_index(url)
-    log.info(f"🎈 正在下载{index.name}，具有{len(index.chpts)}章节的小说")
+    log.info(f"🎈 正在下载《{index.name}》，具有{len(index.chpts)}章节的小说")
 
     chpts: list[str] = []
     with Progress() as progress:
-        download = progress.add_task("🛻 下载中")
+        download = progress.add_task("🛻 下载中", total=len(index.chpts))
         try:
             for info in index.chpts:
                 chpt = crawler.get_chpt(info.url)
                 chpts.append(chpt)
                 progress.advance(download)
+                time.sleep(random.randint(5, 7))
         except Exception as e:
             log.error(e)
         finally:
@@ -80,22 +83,23 @@ def range_donwload(url: str, lower_bound: int, upper_bound: int) -> None:
 
     index = crawler.get_index(url)
     lower_name = index.chpts[lower_bound].name
-    upper_name = index.chpts[upper_bound].name
-    log.info(f"🎈 正在下载{index.name}，范围从 {lower_name} 到 {upper_name}")
+    upper_name = index.chpts[upper_bound - 1].name
+    log.info(f"🎈 正在下载《{index.name}》，范围从《{lower_name}》到《{upper_name}》")
 
     chpts: list[str] = []
     with Progress() as progress:
-        download = progress.add_task("🛻 下载中")
+        download = progress.add_task("🛻 下载中", total=upper_bound - lower_bound)
         try:
             for info in index.chpts[lower_bound:upper_bound]:
                 chpt = crawler.get_chpt(info.url)
                 chpts.append(chpt)
                 progress.advance(download)
+                time.sleep(random.randint(5, 7))
         except Exception as e:
             log.error(e)
         finally:
             content = "\n".join(chpts)
-            save(f"{index.name}-{lower_bound}-{upper_bound}", content)
+            save(f"{index.name}-{lower_bound + 1}-{upper_bound}", content)
             log.info("✨ 小说保存完毕")
 
 
