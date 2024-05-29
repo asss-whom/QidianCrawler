@@ -64,7 +64,7 @@ def full_download(url: str) -> None:
                 chpt = crawler.get_chpt(info.url)
                 chpts.append(chpt)
                 progress.advance(download)
-                time.sleep(random.randint(5, 7))
+                time.sleep(random.uniform(5, 7))
         except Exception as e:
             log.error(e)
         finally:
@@ -94,7 +94,7 @@ def range_donwload(url: str, lower_bound: int, upper_bound: int) -> None:
                 chpt = crawler.get_chpt(info.url)
                 chpts.append(chpt)
                 progress.advance(download)
-                time.sleep(random.randint(5, 7))
+                time.sleep(random.uniform(5, 7))
         except Exception as e:
             log.error(e)
         finally:
